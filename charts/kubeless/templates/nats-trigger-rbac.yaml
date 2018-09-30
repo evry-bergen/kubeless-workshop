@@ -1,0 +1,39 @@
+{{- if and .Values.natsTrigger.enabled .Values.rbac.enabled -}}
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: {{ include "kubeless.fullname" . }}-nats-trigger-controller
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - services
+  - configmaps
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - kubeless.io
+  resources:
+  - functions
+  - natstriggers
+  verbs:
+  - get
+  - list
+  - watch
+  - update
+  - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "kubeless.fullname" . }}-nats-trigger-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "kubeless.fullname" . }}-nats-trigger-controller
+subjects:
+- kind: ServiceAccount
+  name: {{ include "kubeless.fullname" . }}-controller
+  namespace: {{ .Release.Namespace }}
+{{- end }}

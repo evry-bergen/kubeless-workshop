@@ -1,0 +1,70 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ include "kubeless.fullname" . }}-controller
+  labels:
+    app.kubernetes.io/name: {{ include "kubeless.name" . }}
+    helm.sh/chart: {{ include "kubeless.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    kubeless: controller
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "kubeless.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      kubeless: controller
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "kubeless.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        kubeless: controller
+    spec:
+      containers:
+        # Kubeless Function Controller
+        - name: function-controller
+          image: "{{ .Values.functionController.image.repository }}:{{ .Values.functionController.image.tag }}"
+          imagePullPolicy: {{ .Values.functionController.image.pullPolicy }}
+          resources:
+{{ toYaml .Values.functionController.resources | indent 12 }}
+          env:
+{{ include "kubeless.controller.env" . | indent 12 }}
+
+        # Kubeless Http Trigger Controller
+        - name: http-trigger-controller
+          image: "{{ .Values.httpTriggerController.image.repository }}:{{ .Values.httpTriggerController.image.tag }}"
+          imagePullPolicy: {{ .Values.httpTriggerController.image.pullPolicy }}
+          resources:
+{{ toYaml .Values.httpTriggerController.resources | indent 12 }}
+          env:
+{{ include "kubeless.controller.env" . | indent 12 }}
+
+        # Kubeless Cronjob Trigger Controller
+        - name: cronjob-trigger-controller
+          image: "{{ .Values.cronjobTriggerController.image.repository }}:{{ .Values.cronjobTriggerController.image.tag }}"
+          imagePullPolicy: {{ .Values.cronjobTriggerController.image.pullPolicy }}
+          resources:
+{{ toYaml .Values.cronjobTriggerController.resources | indent 12 }}
+          env:
+{{ include "kubeless.controller.env" . | indent 12 }}
+
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+
+{{- if .Values.rbac.enabled }}
+      serviceAccountName: {{ include "kubeless.fullname" . }}-controller
+{{- end }}

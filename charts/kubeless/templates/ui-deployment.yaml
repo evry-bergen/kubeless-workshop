@@ -1,0 +1,67 @@
+{{- if .Values.ui.enabled -}}
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ include "kubeless.fullname" . }}-ui
+  labels:
+    app.kubernetes.io/name: {{ include "kubeless.name" . }}
+    helm.sh/chart: {{ include "kubeless.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    kubeless: ui
+spec:
+  replicas: {{ .Values.ui.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "kubeless.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      kubeless: ui
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "kubeless.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        kubeless: ui
+    spec:
+      containers:
+        # Kubeless UI
+        - name: ui
+          image: "{{ .Values.ui.deployment.ui.image.repository }}:{{ .Values.ui.deployment.ui.image.tag }}"
+          imagePullPolicy: {{ .Values.ui.deployment.ui.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          resources:
+{{ toYaml .Values.ui.deployment.ui.resources | indent 12 }}
+
+        # Kubeless UI proxy
+        - name: proxy
+          image: "{{ .Values.ui.deployment.proxy.image.repository }}:{{ .Values.ui.deployment.proxy.image.tag }}"
+          imagePullPolicy: {{ .Values.ui.deployment.proxy.image.pullPolicy }}
+          args:
+          - proxy
+          - "-p"
+          - "8080"
+          imagePullPolicy: Always
+
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+
+{{- if .Values.rbac.enabled }}
+      serviceAccountName: {{ include "kubeless.fullname" . }}-ui
+{{- end }}
+
+{{- end }}
