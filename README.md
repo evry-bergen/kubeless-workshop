@@ -69,6 +69,17 @@ $ helm upgrade kubeless ./charts/kubeless --namespace kubeless \
   --install --wait --timeout 600 --force  --values assets/kubeless.yaml
 ```
 
+### Install NATS
+
+[NATS](https://nats.io) is a simple, high performance open source messaging
+system for cloud native applications, IoT messaging, and microservices
+architectures. Kubeless has native support for NATS in addition to Kafka.
+
+```shell
+$ helm upgrade nats stable/nats --namespace nats-io \
+  --install --wait --timeout 600 --force  --values assets/nats.yaml
+```
+
 Verify Kubeless installation
 
 ```shell

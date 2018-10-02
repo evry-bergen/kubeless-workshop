@@ -3,3 +3,6 @@ rbac:
 
 ui:
   enabled: true
+
+natsTrigger:
+  enabled: true
