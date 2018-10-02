@@ -65,8 +65,8 @@ Download the Kubeless client CLI:
 | Windows      | https://github.com/kubeless/kubeless/releases/download/v1.0.0-alpha.8/kubeless_windows-amd64.zip |
 
 ```shell
-$ helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
-$ helm upgrade --install kubeless incubator/kubeless --wait --timeout 600 --force --recreate-pods --namespace kubeless --values assets/kubeless.yaml
+$ helm upgrade kubeless ./charts/kubeless --namespace kubeless \
+  --install --wait --timeout 600 --force  --values assets/kubeless.yaml
 ```
 
 Verify Kubeless installation
