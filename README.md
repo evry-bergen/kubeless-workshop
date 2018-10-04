@@ -39,10 +39,6 @@ Download the Minikube utility:
 | Linux        | https://github.com/kubernetes/minikube/releases/download/v0.29.0/minikube-linux-amd64   |
 | Windows      | https://github.com/kubernetes/minikube/releases/download/v0.29.0/minikube-windows-amd64 |
 
-[minikube-mac-dl]:
-[minikube-linux-dl]:
-[minikube-windows-dl]:
-
 ```shell
 $ minikube start --memory 4096 --disk-size 40g --kubernetes-version v1.11.3 -v 4
 $ minikube addons enable ingress
