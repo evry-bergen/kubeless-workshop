@@ -1,5 +1,6 @@
 {{- if and .Values.ui.enabled .Values.ui.ingress.enabled -}}
-{{- $fullName := include "kubeless.fullname" . -}}-ui
+{{- $kubeName := include "kubeless.fullname" . -}}
+{{- $fullName := printf "%s-%s" $kubeName "ui" -}}
 {{- $ingressPath := .Values.ui.ingress.path -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
