@@ -36,7 +36,7 @@ $ kubectl cluster-info
 $ kubectl get nodes
 ```
 
-Set up the required ingress host names for this workshop:
+Set up the required ingress hostnames for this workshop:
 
 ```shell
 $ export MINIKUBE_IP=$(minikube ip)
@@ -46,6 +46,7 @@ $ sudo sh -c "echo \"$MINIKUBE_IP  nats.minikube\" >> /etc/hosts"
 $ sudo sh -c "echo \"$MINIKUBE_IP  kubeless.minikube\" >> /etc/hosts"
 $ sudo sh -c "echo \"$MINIKUBE_IP  function-python.minikube\" >> /etc/hosts"
 $ sudo sh -c "echo \"$MINIKUBE_IP  function-node.minikube\" >> /etc/hosts"
+```
 
 ## Setting up Helm
 
