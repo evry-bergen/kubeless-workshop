@@ -31,7 +31,8 @@ spec:
 {{ toYaml .Values.natsTrigger.deployment.resources | indent 12 }}
           env:
 {{ include "kubeless.controller.env" . | indent 12 }}
-
+            - name: NATS_URL
+              value: "nats://{{ .Values.natsTrigger.deployment.env.natsUrl }}"
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
