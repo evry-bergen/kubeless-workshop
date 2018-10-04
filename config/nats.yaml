@@ -1,3 +1,7 @@
+clientService:
+  type: NodePort
+  nodePort: 30422
+
 auth:
   enabled: false
 

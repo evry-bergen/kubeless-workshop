@@ -1,0 +1,18 @@
+ingress:
+  enabled: true
+  hosts:
+    - minio.minikube
+
+service:
+  type: NodePort
+  nodePort: 30900
+
+defaultBucket:
+  enabled: true
+  name: images
+
+minioConfig:
+  nats:
+    enable: true
+    address: nats-nats-client.nats-io.svc.cluster.local:4222
+    subject: bucketevents
