@@ -15,7 +15,7 @@ data:
   enable-build-step: "{{ .Values.config.enableBuildStep }}"
   function-registry-tls-verify: "{{ .Values.config.functionRegistryTLSVerify }}"
   ingress-enabled: "{{ .Values.config.ingressEnabled }}"
-  provision-image: "{{ .Values.config.provisionimage }}"
+  provision-image: "{{ .Values.config.provisionImage }}"
   provision-image-secret: "{{ .Values.config.provisionImagePullSecret }}"
   runtime-images: |-
 {{ .Values.config.runtimeImages | indent 4 }}
