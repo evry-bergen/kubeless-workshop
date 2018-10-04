@@ -24,15 +24,28 @@ Download the Minikube utility:
 
 ```shell
 $ minikube start --memory 4096 --disk-size 40g --kubernetes-version v1.11.3 -v 4
+$ minikube addons enable ingress
 ```
 
 Verify the setup by running the following commands:
 
 ```shell
+$ minikube status
 $ kubectl version
 $ kubectl cluster-info
 $ kubectl get nodes
 ```
+
+Set up the required ingress host names for this workshop:
+
+```shell
+$ export MINIKUBE_IP=$(minikube ip)
+$ sudo sh -c "echo \"\n\" >> /etc/hosts"
+$ sudo sh -c "echo \"$MINIKUBE_IP  minio.minikube\" >> /etc/hosts"
+$ sudo sh -c "echo \"$MINIKUBE_IP  nats.minikube\" >> /etc/hosts"
+$ sudo sh -c "echo \"$MINIKUBE_IP  kubeless.minikube\" >> /etc/hosts"
+$ sudo sh -c "echo \"$MINIKUBE_IP  function-python.minikube\" >> /etc/hosts"
+$ sudo sh -c "echo \"$MINIKUBE_IP  function-node.minikube\" >> /etc/hosts"
 
 ## Setting up Helm
 
