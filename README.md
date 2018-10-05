@@ -165,6 +165,7 @@ $ mc ls --recursive local
 ## 2. Labs
 
 1. [Creating Functions](./labs/1-functions)
+1. [HTTP Triggers](./labs/3-http-triggers)
 
 ## 3. Tips and Tricks
 
