@@ -4,6 +4,6 @@ module.exports = {
 
     const message = `Hello ${event.data || 'World'}`;
 
-    return message;
+    return message.split('').reverse().join('');
   }
 }
