@@ -174,7 +174,14 @@ $ mc ls --recursive local
 
 ### Kubeless UI
 
-You can view the Kubless UI by going to [kubeless.minikube](kubeless-minikube)
-in your browser.
+You can use the Kubless UI to view and manage functions by going to
+[kubeless.minikube](kubeless-minikube) in your browser.
 
 [kubeless-minikube]: http://kubeless.minikube
+
+### Minio UI
+
+You can use the Minio UI to view and manage buckets by going to
+[minio.minikube](minio-minikube) in your browser.
+
+[minio-minikube]: http://minio.minikube
