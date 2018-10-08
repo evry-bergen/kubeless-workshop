@@ -151,5 +151,9 @@ install-grafana:
 		--set ingress.hosts[1]=grafana.$(MINIKUBE_IP).nip.io \
 		$(HELM_VARS)
 
+open-grafana:
+	$(eval MINIKUBE_IP := $(shell minikube ip))
+	@open http://grafana.$(MINIKUBE_IP).nip.io
+
 remove-grafana:
 	@helm delete --purge grafana

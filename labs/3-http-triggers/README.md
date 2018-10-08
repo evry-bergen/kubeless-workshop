@@ -73,3 +73,16 @@ $ curl --data '{"name": "Batman"}' \
        --header "Content-Type: application/json" \
         name-python.192.168.99.100.nip.io
 ```
+
+## Clean Up
+
+When you are done you can exit your open shells and run the following command:
+
+```shell
+$ kubeless function delete hello-python
+$ kubeless function delete hello-node
+```
+
+-----
+
+<p align="right"><a href="../4-monitoring#readme">Lab 4: Monitoring Functions ➡️</a></p>
