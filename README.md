@@ -164,11 +164,11 @@ $ mc ls --recursive local
 
 ## 2. Labs
 
-1. [Creating Functions](./labs/1-functions)
-1. [Function Depenendies](./labs/2-dependencies)
-1. [HTTP Triggers](./labs/3-http-triggers)
-1. [Minitoring Functions](./labs/4-monitoring)
-1. [Serverless Application](./labs/9-serverless)
+1. [Creating Functions](./labs/1-functions#readme)
+1. [Function Depenendies](./labs/2-dependencies#readme)
+1. [HTTP Triggers](./labs/3-http-triggers#readme)
+1. [Minitoring Functions](./labs/4-monitoring#readme)
+1. [Serverless Application](./labs/9-serverless#readme)
 
 ## 3. Tips and Tricks
 

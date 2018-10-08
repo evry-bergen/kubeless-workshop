@@ -167,4 +167,4 @@ $ kubeless function delete hello-node
 
 -----
 
-<p align="right"><a href="../2-dependencies">Lab 2: Managing Dependencies ➡️</a></p>
+<p align="right"><a href="../2-dependencies#readme">Lab 2: Managing Dependencies ➡️</a></p>

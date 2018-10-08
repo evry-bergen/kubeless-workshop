@@ -84,4 +84,4 @@ $ kubeless function delete weather
 
 -----
 
-<p align="right"><a href="../3-http-triggers">Lab 3: HTTP Triggers ➡️</a></p>
+<p align="right"><a href="../3-http-triggers#readme">Lab 3: HTTP Triggers ➡️</a></p>
