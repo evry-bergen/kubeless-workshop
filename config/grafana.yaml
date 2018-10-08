@@ -42,4 +42,4 @@ dashboardProviders:
 dashboards:
   default:
     kubeless:
-      url: https://kubeless.io/docs/misc/kubeless-grafana-dashboard.json
+      url: https://github.com/evry-bergen/kubeless-workshop/raw/master/config/dashboard.json
