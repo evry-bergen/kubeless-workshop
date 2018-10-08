@@ -237,6 +237,13 @@ Set up the `mc` client command line utility to communicate with the Minio
 installation.
 
 ```shell
+$ make configure-minio-client
+```
+
+<details>
+ <summary>Manual configure Minio client</summary>
+
+```shell
 $ export MINIKUBE_IP=$(minikube ip)
 $ mc config host add local \
   http://${MINIKUBE_IP}:30900 \
@@ -245,8 +252,9 @@ $ mc config host add local \
   --api "S3v4" \
   --lookup "path"
 ```
+</details>
 
-Verify the setup by running:
+#### Verify Minio client setup:
 
 ```shell
 $ mc ls --recursive local

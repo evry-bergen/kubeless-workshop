@@ -40,9 +40,11 @@ else
     endif
 endif
 
-MC_BIN := mc
-MC_BASE_URL := https://dl.minio.io/client/mc/release
-MC_FULL_URL := $(MC_BASE_URL)/$(CLIENT_OS)-$(CLIENT_ARCH)/$(MC_BIN)
+MINIO_BIN 			:= mc
+MINIO_BASE_URL 	:= https://dl.minio.io/client/mc/release
+MINIO_FULL_URL 	:= $(MINIO_BASE_URL)/$(CLIENT_OS)-$(CLIENT_ARCH)/$(MINIO_BIN)
+MINIO_KEY_ID	 	:= AKIAIOSFODNN7EXAMPLE
+MINIO_SECRET	 	:= wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY \
 
 all-install: $(addprefix install-, $(HELM_CHARTS))
 
@@ -84,9 +86,27 @@ remove-nats:
 	@helm delete --purge nats
 
 install-minio-client:
-	curl -vOL $(MC_FULL_URL)
-	chmod +x $(MC_BIN)
-	sudo mv $(MC_BIN) /usr/local/bin/$(MC_BIN)
+	curl -vOL $(MINIO_FULL_URL)
+	chmod +x $(MINIO_BIN)
+	sudo mv $(MINIO_BIN) /usr/local/bin/$(MINIO_BIN)
+
+configure-minio-client:
+	$(eval MINIKUBE_IP := $(shell minikube ip))
+	@mc config host add local \
+		http://$(MINIKUBE_IP):30900 \
+		$(MINIO_KEY_ID) \
+		$(MINIO_SECRET) \
+		--api "S3v4" \
+		--lookup "path"
+	@mc mb local/uploads
+	@mc mb local/thumbnails
+
+verify-minio-client:
+	@mc mb local/client-test
+	@mc cp LICENSE local/client-test
+	@mc ls local/client-test
+	@mc rm local/client-test/LICENSE
+	@mc rm local/client-test
 
 install-minio:
 	@helm repo update
