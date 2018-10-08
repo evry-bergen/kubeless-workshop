@@ -1,7 +1,7 @@
 ARCH := amd64
 
 HELM_VARS := --install --wait --timeout 600 --force
-HELM_CHARTS := helm nats minio kubeless
+HELM_CHARTS := helm nats minio promethues grafana kubeless
 
 MINIKUBE_RAM := 4096
 MINIKUBE_DISK := 40g
@@ -46,8 +46,16 @@ MC_FULL_URL := $(MC_BASE_URL)/$(CLIENT_OS)-$(CLIENT_ARCH)/$(MC_BIN)
 
 all-install: $(addprefix install-, $(HELM_CHARTS))
 
-echo:
-	@echo $(CLIENT_OS)-$(CLIENT_ARCH)
+add-etc-hosts:
+	$(eval MINIKUBE_IP := $(shell minikube ip))
+	@sudo sh -c "echo \"\n\" >> /etc/hosts"
+	@sudo sh -c "echo \"$(MINIKUBE_IP)  minio.minikube\" >> /etc/hosts"
+	@sudo sh -c "echo \"$(MINIKUBE_IP)  nats.minikube\" >> /etc/hosts"
+	@sudo sh -c "echo \"$(MINIKUBE_IP)  kubeless.minikube\" >> /etc/hosts"
+	@sudo sh -c "echo \"$(MINIKUBE_IP)  prometheus.minikube\" >> /etc/hosts"
+	@sudo sh -c "echo \"$(MINIKUBE_IP)  grafana.minikube\" >> /etc/hosts"
+	@sudo sh -c "echo \"$(MINIKUBE_IP)  function-python.minikube\" >> /etc/hosts"
+	@sudo sh -c "echo \"$(MINIKUBE_IP)  function-node.minikube\" >> /etc/hosts"
 
 start-minikube:
 	@minikube start \

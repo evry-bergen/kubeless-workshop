@@ -55,15 +55,25 @@ $ kubectl get nodes
 
 Set up the required ingress hostnames for this workshop:
 
+```
+$ make add-etc-hosts
+```
+
+<details>
+ <summary>Manual /etc/hosts install</summary>
+
 ```shell
 $ export MINIKUBE_IP=$(minikube ip)
 $ sudo sh -c "echo \"\n\" >> /etc/hosts"
 $ sudo sh -c "echo \"$MINIKUBE_IP  minio.minikube\" >> /etc/hosts"
 $ sudo sh -c "echo \"$MINIKUBE_IP  nats.minikube\" >> /etc/hosts"
 $ sudo sh -c "echo \"$MINIKUBE_IP  kubeless.minikube\" >> /etc/hosts"
+$ sudo sh -c "echo \"$MINIKUBE_IP  promethues.minikube\" >> /etc/hosts"
+$ sudo sh -c "echo \"$MINIKUBE_IP  grafana.minikube\" >> /etc/hosts"
 $ sudo sh -c "echo \"$MINIKUBE_IP  function-python.minikube\" >> /etc/hosts"
 $ sudo sh -c "echo \"$MINIKUBE_IP  function-node.minikube\" >> /etc/hosts"
 ```
+</details>
 
 ### 1.2. Install up Helm
 
@@ -107,8 +117,13 @@ $ make install-kubeless
  <summary>Manual install with Helm</summary>
 
 ```shell
-$ helm upgrade kubeless ./charts/kubeless --namespace kubeless --values config/kubeless.yaml \
-  --install --wait --timeout 600 --force
+$ helm upgrade kubeless ./charts/kubeless \
+  --namespace kubeless \
+  --values config/kubeless.yaml \
+  --install \
+  --wait \
+  --timeout 600 \
+  --force
 ```
 </details>
 
@@ -118,7 +133,46 @@ Verify the Kubeless installation:
 $ kubeless get-server-config
 ```
 
-### 1.4. Install NATS
+### 1.4. Install Promethues
+
+Kubeless has native integration with [Prometheus](promethues).
+
+```
+$ make install-promethues
+$ make install-grafana
+```
+
+<details>
+ <summary>Manual install with Helm</summary>
+
+```shell
+$ export MINIKUBE_IP=$(minikube ip)
+
+$ helm upgrade prometheus stable/prometheus \
+  --version 7.2.0 \
+  --namespace monitoring \
+  --values config/prometheus.yaml \
+  --set server.ingress.hosts[1]=prometheus.${MINIKUBE_IP}.nip.io \
+  --install \
+  --wait \
+  --timeout 600 \
+  --force
+
+$ helm upgrade grafana stable/grafana \
+  --version 1.16.0 \
+  --namespace monitoring \
+  --values config/grafana.yaml \
+  --set ingress.hosts[1]=grafana.${MINIKUBE_IP}.nip.io \
+  --install \
+  --wait \
+  --timeout 600 \
+  --force
+```
+</details>
+
+[promethues]: https://promethues.io
+
+### 1.5. Install NATS
 
 [NATS](https://nats.io) is a simple, high performance open source messaging
 system for cloud native applications, IoT messaging, and microservices
@@ -134,12 +188,17 @@ $ make install-nats
  <summary>Manual install with Helm</summary>
 
 ```shell
-$ helm upgrade nats stable/nats --namespace nats --values config/nats.yaml \
-  --install --wait --timeout 600 --force
+$ helm upgrade nats stable/nats \
+  --namespace nats \
+  --values config/nats.yaml \
+  --install \
+  --wait \
+  --timeout 600 \
+  --force
 ```
 </details>
 
-### 1.5. Install Minio
+### 1.6. Install Minio
 
 [Minio](https://minio.io) is a high performance distributed object storage
 server, designed for large-scale private cloud infrastructure.
@@ -162,10 +221,17 @@ $ make install-minio
  <summary>Manual install with Helm</summary>
 
 ```shell
-$ helm upgrade minio stable/minio --namespace minio --values config/minio.yaml \
-  --install --wait --timeout 600 --force
+$ helm upgrade minio stable/minio \
+  --namespace minio \
+  --values config/minio.yaml \
+  --install \
+  --wait \
+  --timeout 600 \
+  --force
 ```
 </details>
+
+#### Configure Minio client
 
 Set up the `mc` client command line utility to communicate with the Minio
 installation.
