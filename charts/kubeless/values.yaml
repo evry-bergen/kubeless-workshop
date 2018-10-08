@@ -276,4 +276,4 @@ natsTrigger:
       tag: v1.0.0-alpha.9
       pullPolicy: IfNotPresent
     env:
-      natsUrl: nats-nats-client.nats-io.svc.cluster.local:4222
+      natsUrl: nats-nats-client.nats.svc.cluster.local:4222

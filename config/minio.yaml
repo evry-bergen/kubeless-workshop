@@ -14,5 +14,5 @@ defaultBucket:
 minioConfig:
   nats:
     enable: true
-    address: nats-nats-client.nats-io.svc.cluster.local:4222
+    address: nats-nats-client.nats.svc.cluster.local:4222
     subject: bucketevents

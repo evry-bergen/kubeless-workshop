@@ -65,7 +65,7 @@ $ sudo sh -c "echo \"$MINIKUBE_IP  function-python.minikube\" >> /etc/hosts"
 $ sudo sh -c "echo \"$MINIKUBE_IP  function-node.minikube\" >> /etc/hosts"
 ```
 
-### 1.2. Setting up Helm
+### 1.2. Install up Helm
 
 Download the Helm client CLI:
 
@@ -87,7 +87,7 @@ Verify that Helm is set up correctly:
 $ helm version
 ```
 
-### 1.3. Installing Kubeless
+### 1.3. Install Kubeless
 
 Download the Kubeless client CLI:
 
@@ -97,12 +97,20 @@ Download the Kubeless client CLI:
 | Linux        | https://github.com/kubeless/kubeless/releases/download/v1.0.0-alpha.8/kubeless_linux-amd64.zip   |
 | Windows      | https://github.com/kubeless/kubeless/releases/download/v1.0.0-alpha.8/kubeless_windows-amd64.zip |
 
-Install the Kubeless control pane using Helm:
+Install the Kubeless control pane:
 
 ```shell
-$ helm upgrade kubeless ./charts/kubeless --namespace kubeless \
-  --install --wait --timeout 600 --force  --values config/kubeless.yaml
+$ make install-kubeless
 ```
+
+<details>
+ <summary>Manual install with Helm</summary>
+
+```shell
+$ helm upgrade kubeless ./charts/kubeless --namespace kubeless --values config/kubeless.yaml \
+  --install --wait --timeout 600 --force
+```
+</details>
 
 Verify the Kubeless installation:
 
@@ -116,12 +124,20 @@ $ kubeless get-server-config
 system for cloud native applications, IoT messaging, and microservices
 architectures. Kubeless has native support for NATS in addition to Kafka.
 
-Install the NATS server using Helm:
+Install the NATS server:
 
 ```shell
-$ helm upgrade nats stable/nats --namespace nats-io \
-  --install --wait --timeout 600 --force  --values config/nats.yaml
+$ make install-nats
 ```
+
+<details>
+ <summary>Manual install with Helm</summary>
+
+```shell
+$ helm upgrade nats stable/nats --namespace nats --values config/nats.yaml \
+  --install --wait --timeout 600 --force
+```
+</details>
 
 ### 1.5. Install Minio
 
@@ -136,12 +152,20 @@ Download the Minio client CLI:
 | Linux        | https://dl.minio.io/client/mc/release/linux-amd64/mc       |
 | Windows      | https://dl.minio.io/client/mc/release/windows-amd64/mc.exe |
 
-Install the Minio server using Helm:
+Install the Minio server:
 
 ```shell
-$ helm upgrade minio stable/minio --namespace minio \
-  --install --wait --timeout 600 --force --values config/minio.yaml
+$ make install-minio
 ```
+
+<details>
+ <summary>Manual install with Helm</summary>
+
+```shell
+$ helm upgrade minio stable/minio --namespace minio --values config/minio.yaml \
+  --install --wait --timeout 600 --force
+```
+</details>
 
 Set up the `mc` client command line utility to communicate with the Minio
 installation.
