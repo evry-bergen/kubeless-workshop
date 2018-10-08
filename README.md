@@ -209,3 +209,12 @@ You can use the Minio UI to view and manage buckets by going to
 [minio.minikube](minio-minikube) in your browser.
 
 [minio-minikube]: http://minio.minikube
+
+### Example Functions
+
+* https://github.com/kubeless/functions/tree/master/incubator
+* https://github.com/kubeless/kubeless/tree/master/examples
+
+## License
+
+[MIT License](./LICENSE)
