@@ -43,6 +43,7 @@ Download the Minikube utility:
 $ minikube start --memory 4096 --disk-size 40g --kubernetes-version v1.11.3 -v 4
 $ minikube addons enable ingress
 ```
+### Verify Minikube
 
 Verify the setup by running the following commands:
 
@@ -85,7 +86,7 @@ Download the Helm client CLI:
 | Linux        | https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz  |
 | Windows      | https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-windows-amd64.zip   |
 
-Insstall the Helm server component:
+Install the Helm server component:
 
 ```shell
 $ helm init --upgrade
