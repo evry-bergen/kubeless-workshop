@@ -138,7 +138,7 @@ $ kubeless get-server-config
 Kubeless has native integration with [Prometheus](promethues).
 
 ```
-$ make install-promethues
+$ make install-prometheus
 $ make install-grafana
 ```
 
