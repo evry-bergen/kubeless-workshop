@@ -10,7 +10,7 @@ You could also use Grafana to visualize the prometheus metrics exposed by
 Kubeless. Example of a Grafana dashboard for Kubeless showing function call
 rate, function failure rate and execution duration:
 
-![https://kubeless.io/docs/img/kubeless-grafana-dashboard.png]()
+![Kubeless Grafana dashboard](https://kubeless.io/docs/img/kubeless-grafana-dashboard.png)
 
 ## Expercise: Deploy a flakey function
 
