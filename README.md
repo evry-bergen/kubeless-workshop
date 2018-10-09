@@ -1,7 +1,7 @@
 # Kubeless Workshop
 
-Serverless Kubernetes Workshop with [Kubeless](kubeless), [NATS](nats), and
-[Minio](minio). In this workshop you will learn how to:
+Serverless Kubernetes Workshop with [Kubeless][kubeless], [NATS][nats], and
+[Minio][minio]. In this workshop you will learn how to:
 
 * Set up a [Kubeless][kubeless]
 * Creating functions using the `kubeless` CLI
@@ -15,11 +15,11 @@ Serverless Kubernetes Workshop with [Kubeless](kubeless), [NATS](nats), and
 
 | Tool                        | Version        |
 |-----------------------------|----------------|
-| [Virtualbox](virtualbox-dl) | v5.2.18        |
-| [Minikube](minikube-dl)     | v0.29.0        |
-| [kubectl](kubectl-dl)       | v1.11.3        |
-| [Helm](helm-dl)             | v2.11.0        |
-| [Kubeless](kubeless-dl)     | v1.0.0-alpha.8 |
+| [Virtualbox][virtualbox-dl] | v5.2.18        |
+| [Minikube][minikube-dl]     | v0.29.0        |
+| [kubectl][kubectl-dl]       | v1.11.3        |
+| [Helm][helm-dl]             | v2.11.0        |
+| [Kubeless][kubeless-dl]     | v1.0.0-alpha.8 |
 
 [virtualbox-dl]: https://www.virtualbox.org/wiki/Downloads
 [minikube-dl]: https://github.com/kubernetes/minikube/releases
@@ -135,7 +135,7 @@ $ kubeless get-server-config
 
 ### 1.4. Install Promethues
 
-Kubeless has native integration with [Prometheus](promethues).
+Kubeless has native integration with [Prometheus][promethues].
 
 ```
 $ make install-promethues
@@ -273,14 +273,14 @@ $ mc ls --recursive local
 ### Kubeless UI
 
 You can use the Kubless UI to view and manage functions by going to
-[kubeless.minikube](kubeless-minikube) in your browser.
+[kubeless.minikube][kubeless-minikube] in your browser.
 
 [kubeless-minikube]: http://kubeless.minikube
 
 ### Minio UI
 
 You can use the Minio UI to view and manage buckets by going to
-[minio.minikube](minio-minikube) in your browser.
+[minio.minikube][minio-minikube] in your browser.
 
 [minio-minikube]: http://minio.minikube
 
