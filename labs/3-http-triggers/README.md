@@ -65,13 +65,13 @@ By default Kubeless creates a default hostname in form of `.MINIKUBE_IP.nip.io`.
 Alternatively, you can provide a real hostname with `--hostname` flag. You can
 also set the path by using the `--path` flag.
 
-Lets send some JSON data `{"name": "Batman"} to this address and see what we get
+Lets send some JSON data `{"name": "Batman"}` to this address and see what we get
 in return:
 
 ```shell
 $ curl --data '{"name": "Batman"}' \
        --header "Content-Type: application/json" \
-        name-python.192.168.99.100.nip.io
+        name-python.$(minikube ip).nip.io
 ```
 
 ## Clean Up
